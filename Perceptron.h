@@ -16,26 +16,30 @@ class Perceptron {
         ~Perceptron();
         Layer * GetLayer();
         // initialising layer
-        void InitLayer(ImageHeader imgHdr, LabelHeader lblHdr, int inputSize);
+        void InitLayer(ImageHeader imgHdr, LabelHeader lblHdr, int neuronSize);
+        void InitSigmoidLayer(ImageHeader imgHdr, int neuronSize);
 
         void ResizePerceptron(ImageHeader imgHdr, LabelHeader lblHdr, int layerSize, int neuronSize);
 
         GLdouble SigmoidFunction(GLdouble targetInput);
 
         //training perceptron
-        void SetLayer(GLdouble** imgInput, ImageHeader imgHdr, int inputSize);
+        void SetLayer(GLdouble** imgInput, ImageHeader imgHdr, int layerSize,int neuronSize);
         void SetLabel(GLdouble * lblInput, LabelHeader lblHdr);
-        void CalculateOutput(ImageHeader imgHdr, int inputSize);
-        GLdouble CalculateError(ImageHeader imgHdr, int targetNeuron);
-        void UpdateNeuronWeights(ImageHeader imgHdr, int targetNeuron, GLdouble stdError, GLdouble learningRate);
+        void ForwardPropagation(ImageHeader imgHdr, int layerSize, int neuronSize);
+        void CalculateOutput(ImageHeader imgHdr, int layerSize, int neuronSize);
+        GLdouble CalculateError(ImageHeader imgHdr, int targetLayer, int targetNeuron);
+        void UpdateNeuronWeights(ImageHeader imgHdr, int targetLayer, int targetNeuron, GLdouble stdError, GLdouble learningRate);
 
 
         // testing perceptron
         std::vector <GLdouble> SetTargetOutput(int targetIndex, int outputSize);
-        int  GetLayerPrediction(int outputSize);
+        int  GetLayerPrediction(int layerSize, int neuronSize);
 
     private:
-        Layer * layerOne;
+        Layer * theLayer;
+        Layer * sigmoidLayer;
+
         int layerSize;
         GLdouble * imgLbl;
 

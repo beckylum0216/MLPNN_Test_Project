@@ -23,7 +23,7 @@ void GetHeaders()
     lblHdr = getFiles.ReadLabelHeader(lblFile);
 }
 
-void TrainModel(Perceptron * & layerOne)
+void TrainModel(Perceptron * & perceptronOne, int layerSize, int neuronSize)
 {
     std::cout << "Running Training..." << std::endl;
 
@@ -31,7 +31,7 @@ void TrainModel(Perceptron * & layerOne)
     std::string imgFile = "./mnist/train-images.idx3-ubyte";
     std::string lblFile = "./mnist/train-labels.idx1-ubyte";
 
-    layerOne->SetLabel(getFiles.ReadLabelFile(lblFile, lblHdr), lblHdr);
+    perceptronOne->SetLabel(getFiles.ReadLabelFile(lblFile, lblHdr), lblHdr);
 
     GLdouble *** tempImgMatrix = new GLdouble **[imgHdr.maxImages]();
     for(int ii = 0; ii < imgHdr.maxImages; ii += 1)
@@ -45,24 +45,30 @@ void TrainModel(Perceptron * & layerOne)
 
     tempImgMatrix = getFiles.ReadImageFile(imgFile, imgHdr);
 
-    layerOne->InitLayer(imgHdr, lblHdr, 10);
+    perceptronOne->InitLayer(imgHdr, lblHdr, neuronSize);
+    perceptronOne->InitSigmoidLayer(imgHdr, neuronSize);
 
     for(int epoch = 0; epoch < 10; epoch += 1)
     {
         for(int ii = 0; ii < imgHdr.maxImages; ii += 1)
         {
-            layerOne->SetLayer(tempImgMatrix[ii], imgHdr, 10);
-            layerOne->CalculateOutput(imgHdr, 10);
+            perceptronOne->SetLayer(tempImgMatrix[ii], imgHdr, 2,10);
         }
+
+        perceptronOne->ForwardPropagation(imgHdr, layerSize, neuronSize);
+        perceptronOne->CalculateOutput(imgHdr, layerSize, neuronSize);
 
         // calculate error and update weights
-        for(int ii = 0; ii < 10; ii += 1)
+        for(int hh = 0; hh < layerSize; hh += 1)
         {
-            GLdouble stdError;
-            stdError = layerOne->CalculateError(imgHdr, ii);
-            layerOne->UpdateNeuronWeights(imgHdr, ii, stdError, 0.001);
-
+            for(int ii = 0; ii < 10; ii += 1)
+            {
+                GLdouble stdError;
+                stdError = perceptronOne->CalculateError(imgHdr, hh, ii);
+                perceptronOne->UpdateNeuronWeights(imgHdr, hh, ii, stdError, 0.001);
+            }
         }
+
     }
 
 
@@ -80,7 +86,7 @@ void GetTestingHeaders()
 }
 
 
-void TestModel(Perceptron * layerOne)
+void TestModel(Perceptron * layerOne, int layerSize, int neuronSize)
 {
     UtilityFunctions getFiles;
     std::string imgFile = "./mnist/t10k-images.idx3-ubyte";
@@ -106,10 +112,11 @@ void TestModel(Perceptron * layerOne)
     for(int ii = 0; ii < imgHdr.maxImages; ii += 1)
     {
 
-        layerOne->SetLayer(testImgMatrix[ii], imgHdr, 10);
-        layerOne->CalculateOutput(imgHdr, 10);
+        layerOne->SetLayer(testImgMatrix[ii], imgHdr, layerSize, neuronSize);
+        layerOne->ForwardPropagation(imgHdr, layerSize, neuronSize);
+        layerOne->CalculateOutput(imgHdr, layerSize, neuronSize);
 
-        int layerPrediction = layerOne->GetLayerPrediction(10);
+        int layerPrediction = layerOne->GetLayerPrediction(layerSize, neuronSize);
 
         if(layerPrediction != testImgLbl[ii])
         {
@@ -162,11 +169,11 @@ void reshape(int w, int h)
 int main(int argc, char** argv)
 {
     GetHeaders();
-    oneLayerNN = new Perceptron(imgHdr, lblHdr, 2);
+    oneLayerNN = new Perceptron(imgHdr, lblHdr, 2, 10);
 
-    TrainModel(oneLayerNN);
+    TrainModel(oneLayerNN, 2, 10);
     GetTestingHeaders();
-    TestModel(oneLayerNN);
+    TestModel(oneLayerNN, 2, 10);
 
     return 0;
 }

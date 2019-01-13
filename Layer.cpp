@@ -18,11 +18,9 @@ Layer::Layer(const Layer &rhsLayer)
     this->layerSize = rhsLayer.layerSize;
 }
 
-
 Layer::Layer(ImageHeader imgHdr, LabelHeader lblHdr, int neuronSize)
 {
     std::cout << "running overloaded layer" << std::endl;
-
 
     theLayer = new Neuron[neuronSize]();
     for(int ii = 0; ii < neuronSize; ii += 1)
@@ -30,8 +28,7 @@ Layer::Layer(ImageHeader imgHdr, LabelHeader lblHdr, int neuronSize)
         theLayer[ii].ResizeNeuron(imgHdr, lblHdr);
     }
 
-
-   std::cout << "layer created..." << std::endl;
+    std::cout << "layer created..." << std::endl;
 }
 
 Layer::~Layer()
@@ -88,9 +85,11 @@ void Layer::ResizeLayer(ImageHeader imgHdr, LabelHeader lblHdr, int inputSize)
 
     layerSize = inputSize;
 
-    delete [] theLayer;
+    std::cout << "Deleting the layer" << std::endl;
+    delete theLayer;
+    std::cout << "Finish deleting the layer" << std::endl;
 
-    theLayer = new Neuron[inputSize];
+    theLayer = new Neuron[inputSize]; // here is the offending declaration causes desstructors to run
 
     for(int ii = 0; ii < inputSize; ii += 1)
     {

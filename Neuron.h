@@ -24,6 +24,7 @@ class Neuron {
         GLdouble ** weightOne;
         GLdouble ** weightTwo;
         GLdouble output;
+        GLdouble sigmoidOutput;
         GLdouble bias;
 
 

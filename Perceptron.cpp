@@ -11,7 +11,7 @@
 
 Perceptron::Perceptron()
 {
-    layerOne = new Layer();
+    theLayer = new Layer();
     layerSize = 1;
     imgLbl = new GLdouble();
 }
@@ -19,49 +19,53 @@ Perceptron::Perceptron()
 Perceptron::Perceptron(ImageHeader imgHdr, LabelHeader lblHdr, int layerSize, int neuronSize)
 {
     std::cout << "num of images: " << imgHdr.maxImages << std::endl;
-    layerOne = new Layer[layerSize];
+    theLayer = new Layer[layerSize];
     for(int ii = 0; ii < layerSize; ii += 1)
     {
-        layerOne[ii].ResizeLayer(imgHdr, lblHdr, neuronSize);
+        theLayer[ii].ResizeLayer(imgHdr, lblHdr, neuronSize);
     }
     imgLbl = new GLdouble[lblHdr.maxLabels]();
+
+    sigmoidLayer = new Layer(imgHdr, lblHdr, neuronSize);
+
 }
 
 Perceptron::~Perceptron()
 {
     std::cout << "deleting perceptron... " << std::endl;
-    delete[] layerOne;
+    delete[] theLayer;
     delete[] imgLbl;
 }
 
 Layer * Perceptron::GetLayer()
 {
-    return layerOne;
+    return theLayer;
 }
 
 
 
-void Perceptron::InitLayer(ImageHeader imgHdr, LabelHeader lblHdr, int inputSize)
+void Perceptron::InitLayer(ImageHeader imgHdr, LabelHeader lblHdr, int neuronSize)
 {
     std::cout << "Running initialisation..." << std::endl;
 
     for(int hh = 0; hh < 2; hh += 1)
     {
-        for(int ii = 0; ii < inputSize; ii += 1)
+        for(int ii = 0; ii < neuronSize; ii += 1)
         {
             std::cout << "Initialising layer: " << ii << std::endl;
             for(int jj = 0; jj < imgHdr.imgWidth; jj += 1)
             {
                 for(int kk = 0; kk < imgHdr.imgHeight; kk += 1)
                 {
-                    layerOne[hh].GetNeurons()[ii].inputArr[jj][kk] = 0.00;
-                    layerOne[hh].GetNeurons()[ii].weightOne[jj][kk] = std::rand()%imgHdr.maxImages/(double)(imgHdr.maxImages);
-                    layerOne[hh].GetNeurons()[ii].weightTwo[jj][kk] = std::rand()%imgHdr.maxImages/(double)(imgHdr.maxImages);
+                    theLayer[hh].GetNeurons()[ii].inputArr[jj][kk] = 0.00;
+                    theLayer[hh].GetNeurons()[ii].weightOne[jj][kk] = std::rand()%imgHdr.maxImages/(double)(imgHdr.maxImages);
+                    theLayer[hh].GetNeurons()[ii].weightTwo[jj][kk] = std::rand()%imgHdr.maxImages/(double)(imgHdr.maxImages);
                 }
             }
 
-            layerOne[hh].GetNeurons()[ii].bias = 0.00;
-            layerOne[hh].GetNeurons()[ii].output = 0.00;
+            theLayer[hh].GetNeurons()[ii].bias = 0.00;
+            theLayer[hh].GetNeurons()[ii].output = 0.00;
+            theLayer[hh].GetNeurons()[ii].sigmoidOutput = 0.00;
         }
     }
 
@@ -74,12 +78,32 @@ void Perceptron::InitLayer(ImageHeader imgHdr, LabelHeader lblHdr, int inputSize
     std::cout << "Finished running initialisation..." << std::endl;
 }
 
-void Perceptron::ResizePerceptron(ImageHeader imgHdr, LabelHeader lblHdr, int inputSize)
+void Perceptron::InitSigmoidLayer(ImageHeader imgHdr, int neuronSize)
+{
+    for(int ii = 0; ii < neuronSize; ii += 1)
+    {
+        for(int jj = 0; jj < imgHdr.imgWidth; jj += 1)
+        {
+            for(int kk = 0; kk < imgHdr.imgHeight; kk += 1)
+            {
+                sigmoidLayer->GetNeurons()[ii].inputArr[jj][kk] = 0.00;
+                sigmoidLayer->GetNeurons()[ii].weightOne[jj][kk] = 0.00;
+                sigmoidLayer->GetNeurons()[ii].weightTwo[jj][kk] = 0.00;
+            }
+        }
+
+        sigmoidLayer->GetNeurons()[ii].bias = 0.00;
+        sigmoidLayer->GetNeurons()[ii].output = 0.00;
+        sigmoidLayer->GetNeurons()[ii].sigmoidOutput = 0.00;
+    }
+}
+
+void Perceptron::ResizePerceptron(ImageHeader imgHdr, LabelHeader lblHdr, int layerSize, int neuronSize)
 {
     std::cout << "Running Resize perceptron..." << std::endl;
-    for(int ii = 0; ii < inputSize; ii += 1)
+    for(int ii = 0; ii < layerSize; ii += 1)
     {
-        layerOne[ii].ResizeLayer(imgHdr, lblHdr, 10);
+        theLayer[ii].ResizeLayer(imgHdr, lblHdr, neuronSize);
     }
 
 
@@ -90,35 +114,37 @@ GLdouble  Perceptron::SigmoidFunction(GLdouble targetInput)
 {
     GLdouble  tempResult;
 
-    tempResult = 1 / 1 + std::exp(targetInput);
+    tempResult = 1 / (1 + std::exp(targetInput));
 
     return tempResult;
 }
 
 
 // reading the pictures as black or white
-void Perceptron::SetLayer(GLdouble** imgInput, ImageHeader imgHdr, int inputSize)
+void Perceptron::SetLayer(GLdouble** imgInput, ImageHeader imgHdr, int layerSize, int neuronSize)
 {
 
-
-    for(int ii = 0; ii < inputSize; ii += 1)
+    for(int hh = 0; hh < layerSize; hh += 1)
     {
-        for(int jj = 0; jj < imgHdr.imgWidth; jj += 1)
+        for(int ii = 0; ii < neuronSize; ii += 1)
         {
-            for(int kk = 0; kk < imgHdr.imgHeight; kk += 1)
+            for(int jj = 0; jj < imgHdr.imgWidth; jj += 1)
             {
-                if(imgInput[jj][kk] == 0)
+                for(int kk = 0; kk < imgHdr.imgHeight; kk += 1)
                 {
-                    layerOne->GetNeurons()[ii].inputArr[jj][kk] = 0;
-                } else
-                {
-                    layerOne->GetNeurons()[ii].inputArr[jj][kk] = 1;
-                }
+                    if(imgInput[jj][kk] == 0)
+                    {
+                        theLayer[hh].GetNeurons()[ii].inputArr[jj][kk] = 0;
+                    } else
+                    {
+                        theLayer[hh].GetNeurons()[ii].inputArr[jj][kk] = 1;
+                    }
 
+                }
             }
         }
-
     }
+
 }
 
 void Perceptron::SetLabel(GLdouble *lblInput, LabelHeader lblHdr)
@@ -129,60 +155,88 @@ void Perceptron::SetLabel(GLdouble *lblInput, LabelHeader lblHdr)
     }
 }
 
-void Perceptron::CalculateOutput(ImageHeader imgHdr, int inputSize)
+//
+// https://becominghuman.ai/neural-network-xor-application-and-fundamentals-6b1d539941ed
+void Perceptron::ForwardPropagation(ImageHeader imgHdr, int layerSize, int neuronSize)
 {
     BooleanArithmetic ba;
 
-    for(int ii = 0; ii < inputSize; ii += 1)
+    for (int hh = 0; hh < layerSize; hh += 1)
     {
-        for(int jj = 0; jj < imgHdr.imgWidth; jj += 1)
+        for(int ii = 0; ii < neuronSize; ii += 1)
         {
-            for(int kk = 0; kk < imgHdr.imgHeight; kk +=1)
+            for(int jj = 0; jj < imgHdr.imgWidth; jj += 1)
             {
-                GLdouble gateOR;
-                GLdouble tempNAND;
-                GLdouble gateNAND;
-                GLdouble gateXOR;
-                GLdouble tempOutput;
-
-                gateOR += layerOne->GetNeurons()[ii].weightOne[jj][kk] + layerOne->GetNeurons()[ii].weightTwo[jj][kk];
-                tempNAND = ba.DotMultiply(imgHdr, layerOne->GetNeurons()[ii].weightOne, layerOne->GetNeurons()[ii].weightTwo);
-                if(tempNAND < 0.50)
+                for(int kk = 0; kk < imgHdr.imgHeight; kk +=1)
                 {
-                    gateNAND += tempNAND;
+                    GLdouble tempOutputOne;
+                    GLdouble tempOutputTwo;
+                    GLdouble tempOutput;
+                    GLdouble tempSigmoid;
+
+                    tempOutputOne = ba.DotMultiply(imgHdr, theLayer[hh].GetNeurons()[ii].inputArr, theLayer[hh].GetNeurons()[ii].weightOne);
+                    tempOutputTwo = ba.DotMultiply(imgHdr, theLayer[hh].GetNeurons()[ii].inputArr, theLayer[hh].GetNeurons()[ii].weightTwo);
+
+                    tempOutput = tempOutputOne + tempOutputTwo;
+
+                    tempSigmoid = SigmoidFunction(tempOutput);
+
+                    theLayer[hh].GetNeurons()[ii].output = tempOutput;
+
+                    theLayer[hh].GetNeurons()[ii].sigmoidOutput = tempSigmoid;
+                    //std::cout << "layer output: " << theLayer->GetNeurons()[ii].output << std::endl;
                 }
-                gateXOR = gateOR * gateNAND;
-                tempOutput = 1 + layerOne->GetNeurons()[ii].inputArr[jj][kk] * gateXOR;
-                layerOne->GetNeurons()[ii].output = SigmoidFunction(tempOutput);
-                //std::cout << "layer output: " << layerOne->GetNeurons()[ii].output << std::endl;
             }
         }
     }
+}
 
-    for(int aa = 0; aa < inputSize; aa += 1)
+void Perceptron::CalculateOutput(ImageHeader imgHdr, int layerSize, int neuronSize)
+{
+    GLdouble solutionOne;
+    GLdouble solutionTwo;
+
+    for(int hh = 0; hh < layerSize; hh += 1)
     {
-        layerOne->GetNeurons()[aa].output /= imgHdr.maxImages;
+        for(int ii = 0; ii < neuronSize; ii += 1)
+        {
+            for(int jj = 0; jj < imgHdr.imgWidth; jj += 1)
+            {
+                for(int kk = 0; kk < imgHdr.imgHeight; kk +=1)
+                {
+
+                    solutionOne += theLayer[hh].GetNeurons()[ii].sigmoidOutput * sigmoidLayer->GetNeurons()[ii].weightOne[jj][kk];
+                    solutionTwo += theLayer[hh].GetNeurons()[ii].sigmoidOutput * sigmoidLayer->GetNeurons()[ii].weightTwo[jj][kk];
+
+                    std::cout << "Solution 1:" << solutionOne << " Solution 2:" << solutionTwo << std::endl;
+
+                    sigmoidLayer->GetNeurons()[ii].output = solutionOne + solutionTwo;
+                    sigmoidLayer->GetNeurons()[ii].sigmoidOutput = SigmoidFunction(solutionOne);
+                }
+            }
+        }
     }
 
 }
 
 // calculate the std error
-GLdouble Perceptron::CalculateError(ImageHeader imgHdr, int targetNeuron)
+GLdouble Perceptron::CalculateError(ImageHeader imgHdr, int targetLayer, int targetNeuron)
 {
     GLdouble  tempError;
 
-    tempError = targetNeuron - layerOne->GetNeurons()[targetNeuron].output;
+    tempError = targetNeuron - GetLayerPrediction(targetLayer, targetNeuron);
 
     return tempError;
 }
 
-void Perceptron::UpdateNeuronWeights(ImageHeader imgHdr, int targetNeuron, GLdouble stdError, GLdouble learningRate)
+void Perceptron::UpdateNeuronWeights(ImageHeader imgHdr, int targetLayer,int targetNeuron, GLdouble stdError, GLdouble learningRate)
 {
     for(int ii = 0; ii < imgHdr.imgWidth; ii += 1)
     {
         for(int jj = 0; jj < imgHdr.imgHeight; jj += 1)
         {
-            layerOne->GetNeurons()[targetNeuron].weightOne[ii][jj] += learningRate * layerOne->GetNeurons()[targetNeuron].inputArr[ii][jj] * stdError;
+            theLayer[targetLayer].GetNeurons()[targetNeuron].weightOne[ii][jj] += learningRate * theLayer[targetLayer].GetNeurons()[targetNeuron].inputArr[ii][jj] * stdError;
+            theLayer[targetLayer].GetNeurons()[targetNeuron].weightTwo[ii][jj] += learningRate * theLayer[targetLayer].GetNeurons()[targetNeuron].inputArr[ii][jj] * stdError;
         }
     }
 }
@@ -206,16 +260,16 @@ std::vector <GLdouble> Perceptron::SetTargetOutput(int targetIndex, int outputSi
     return outputVector;
 }
 
-int Perceptron::GetLayerPrediction(int outputSize)
+int Perceptron::GetLayerPrediction(int layersize, int neuronSize)
 {
     GLdouble maxOutput = 0.00;
     int layerPrediction = 0;
 
-    for (int ii = 0; ii < outputSize; ii += 1)
+    for (int ii = 0; ii < neuronSize; ii += 1)
     {
-        if(layerOne->GetNeurons()[ii].output > maxOutput)
+        if(sigmoidLayer->GetNeurons()[ii].output > maxOutput)
         {
-            maxOutput = layerOne->GetNeurons()[ii].output;
+            maxOutput = sigmoidLayer->GetNeurons()[ii].output;
             layerPrediction = ii;
         }
     }
