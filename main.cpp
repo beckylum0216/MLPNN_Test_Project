@@ -2,6 +2,7 @@
 #include <GL/freeglut.h>
 #include "UtilityFunctions.h"
 #include "Layer.h"
+#include "Convolution.h"
 #include "Perceptron.h"
 
 ImageHeader imgHdr;
@@ -31,6 +32,8 @@ void TrainModel(Perceptron * & perceptronOne, int layerSize, int neuronSize)
     std::string imgFile = "./mnist/train-images.idx3-ubyte";
     std::string lblFile = "./mnist/train-labels.idx1-ubyte";
 
+    Convolution * convolveOne;
+
     perceptronOne->SetLabel(getFiles.ReadLabelFile(lblFile, lblHdr), lblHdr);
 
     GLdouble *** tempImgMatrix = new GLdouble **[imgHdr.maxImages]();
@@ -50,9 +53,12 @@ void TrainModel(Perceptron * & perceptronOne, int layerSize, int neuronSize)
 
     for(int epoch = 0; epoch < 10; epoch += 1)
     {
+        convolveOne = new Convolution(imgHdr, layerSize, neuronSize);
+
         for(int ii = 0; ii < imgHdr.maxImages; ii += 1)
         {
-            perceptronOne->SetLayer(tempImgMatrix[ii], imgHdr, 2,10);
+            // my apologies will refactor when time permits
+            perceptronOne->SetLayer(convolveOne->MaxPooling(convolveOne->GaussianFilter(tempImgMatrix[ii], imgHdr, layerSize, neuronSize), imgHdr, layerSize, neuronSize), imgHdr, layerSize, neuronSize);
         }
 
         perceptronOne->ForwardPropagation(imgHdr, layerSize, neuronSize);

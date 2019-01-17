@@ -59,7 +59,6 @@ void Perceptron::InitLayer(ImageHeader imgHdr, LabelHeader lblHdr, int neuronSiz
                 {
                     theLayer[hh].GetNeurons()[ii].inputArr[jj][kk] = 0.00;
                     theLayer[hh].GetNeurons()[ii].weightOne[jj][kk] = std::rand()%imgHdr.maxImages/(double)(imgHdr.maxImages);
-                    theLayer[hh].GetNeurons()[ii].weightTwo[jj][kk] = std::rand()%imgHdr.maxImages/(double)(imgHdr.maxImages);
                 }
             }
 
@@ -87,8 +86,7 @@ void Perceptron::InitSigmoidLayer(ImageHeader imgHdr, int neuronSize)
             for(int kk = 0; kk < imgHdr.imgHeight; kk += 1)
             {
                 sigmoidLayer->GetNeurons()[ii].inputArr[jj][kk] = 0.00;
-                sigmoidLayer->GetNeurons()[ii].weightOne[jj][kk] = 0.00;
-                sigmoidLayer->GetNeurons()[ii].weightTwo[jj][kk] = 0.00;
+                sigmoidLayer->GetNeurons()[ii].weightOne[jj][kk] = std::rand()%imgHdr.maxImages/(double)(imgHdr.maxImages);
             }
         }
 
@@ -114,7 +112,7 @@ GLdouble  Perceptron::SigmoidFunction(GLdouble targetInput)
 {
     GLdouble  tempResult;
 
-    tempResult = 1 / (1 + std::exp(targetInput));
+    tempResult = 1 - (1 / (1 + std::exp(targetInput)));
 
     return tempResult;
 }
@@ -135,7 +133,8 @@ void Perceptron::SetLayer(GLdouble** imgInput, ImageHeader imgHdr, int layerSize
                     if(imgInput[jj][kk] == 0)
                     {
                         theLayer[hh].GetNeurons()[ii].inputArr[jj][kk] = 0;
-                    } else
+                    }
+                    else
                     {
                         theLayer[hh].GetNeurons()[ii].inputArr[jj][kk] = 1;
                     }
@@ -165,37 +164,36 @@ void Perceptron::ForwardPropagation(ImageHeader imgHdr, int layerSize, int neuro
     {
         for(int ii = 0; ii < neuronSize; ii += 1)
         {
+            GLdouble tempSigmoid;
+
             for(int jj = 0; jj < imgHdr.imgWidth; jj += 1)
             {
                 for(int kk = 0; kk < imgHdr.imgHeight; kk +=1)
                 {
-                    GLdouble tempOutputOne;
-                    GLdouble tempOutputTwo;
                     GLdouble tempOutput;
-                    GLdouble tempSigmoid;
 
-                    tempOutputOne = ba.DotMultiply(imgHdr, theLayer[hh].GetNeurons()[ii].inputArr, theLayer[hh].GetNeurons()[ii].weightOne);
-                    tempOutputTwo = ba.DotMultiply(imgHdr, theLayer[hh].GetNeurons()[ii].inputArr, theLayer[hh].GetNeurons()[ii].weightTwo);
 
-                    tempOutput = tempOutputOne + tempOutputTwo;
+                    tempOutput += ba.DotMultiply(imgHdr, theLayer[hh].GetNeurons()[ii].inputArr, theLayer[hh].GetNeurons()[ii].weightOne);
 
-                    tempSigmoid = SigmoidFunction(tempOutput);
+                    std::cout << "Neuron output: " << tempOutput << std::endl;
 
                     theLayer[hh].GetNeurons()[ii].output = tempOutput;
 
-                    theLayer[hh].GetNeurons()[ii].sigmoidOutput = tempSigmoid;
-                    //std::cout << "layer output: " << theLayer->GetNeurons()[ii].output << std::endl;
+
                 }
             }
+
+            tempSigmoid = SigmoidFunction(theLayer[hh].GetNeurons()[ii].output);
+            theLayer[hh].GetNeurons()[ii].sigmoidOutput = tempSigmoid;
+
+            std::cout << "layer output: " << theLayer->GetNeurons()[ii].sigmoidOutput << std::endl;
         }
+
     }
 }
 
 void Perceptron::CalculateOutput(ImageHeader imgHdr, int layerSize, int neuronSize)
 {
-    GLdouble solutionOne;
-    GLdouble solutionTwo;
-
     for(int hh = 0; hh < layerSize; hh += 1)
     {
         for(int ii = 0; ii < neuronSize; ii += 1)
@@ -204,27 +202,24 @@ void Perceptron::CalculateOutput(ImageHeader imgHdr, int layerSize, int neuronSi
             {
                 for(int kk = 0; kk < imgHdr.imgHeight; kk +=1)
                 {
-
-                    solutionOne += theLayer[hh].GetNeurons()[ii].sigmoidOutput * sigmoidLayer->GetNeurons()[ii].weightOne[jj][kk];
-                    solutionTwo += theLayer[hh].GetNeurons()[ii].sigmoidOutput * sigmoidLayer->GetNeurons()[ii].weightTwo[jj][kk];
-
-                    std::cout << "Solution 1:" << solutionOne << " Solution 2:" << solutionTwo << std::endl;
-
-                    sigmoidLayer->GetNeurons()[ii].output = solutionOne + solutionTwo;
-                    sigmoidLayer->GetNeurons()[ii].sigmoidOutput = SigmoidFunction(solutionOne);
+                    sigmoidLayer->GetNeurons()[ii].output += theLayer[hh].GetNeurons()[ii].sigmoidOutput * sigmoidLayer->GetNeurons()[ii].weightOne[jj][kk];
                 }
             }
+
+            std::cout << "sigmoidLayer Output: " << sigmoidLayer->GetNeurons()[ii].output<< std::endl;
+            sigmoidLayer->GetNeurons()[ii].sigmoidOutput = SigmoidFunction(sigmoidLayer->GetNeurons()[ii].output);
         }
     }
-
 }
 
 // calculate the std error
+// this is suspect error is huge!!!
 GLdouble Perceptron::CalculateError(ImageHeader imgHdr, int targetLayer, int targetNeuron)
 {
     GLdouble  tempError;
 
     tempError = targetNeuron - GetLayerPrediction(targetLayer, targetNeuron);
+    //tempError /= 10;
 
     return tempError;
 }
@@ -235,8 +230,8 @@ void Perceptron::UpdateNeuronWeights(ImageHeader imgHdr, int targetLayer,int tar
     {
         for(int jj = 0; jj < imgHdr.imgHeight; jj += 1)
         {
-            theLayer[targetLayer].GetNeurons()[targetNeuron].weightOne[ii][jj] += learningRate * theLayer[targetLayer].GetNeurons()[targetNeuron].inputArr[ii][jj] * stdError;
-            theLayer[targetLayer].GetNeurons()[targetNeuron].weightTwo[ii][jj] += learningRate * theLayer[targetLayer].GetNeurons()[targetNeuron].inputArr[ii][jj] * stdError;
+            theLayer[targetLayer].GetNeurons()[targetNeuron].weightOne[ii][jj] *= learningRate * theLayer[targetLayer].GetNeurons()[targetNeuron].inputArr[ii][jj] * stdError;
+            sigmoidLayer->GetNeurons()[targetNeuron].weightOne[ii][jj] *= theLayer[targetLayer].GetNeurons()[targetNeuron].sigmoidOutput * learningRate * stdError;
         }
     }
 }

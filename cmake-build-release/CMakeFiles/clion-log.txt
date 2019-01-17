@@ -1,4 +1,25 @@
 "C:\Program Files\JetBrains\CLion 2018.2.6\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - NMake Makefiles" D:\tempML\tempMLPNN_V2
+-- The C compiler identification is MSVC 19.15.26726.0
+-- The CXX compiler identification is MSVC 19.15.26726.0
+-- Check for working C compiler: C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.15.26726/bin/Hostx86/x86/cl.exe
+-- Check for working C compiler: C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.15.26726/bin/Hostx86/x86/cl.exe -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.15.26726/bin/Hostx86/x86/cl.exe
+-- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.15.26726/bin/Hostx86/x86/cl.exe -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found PythonInterp: C:/Python27/python.exe (found version "2.7.15") 
+-- Looking for pthread.h
+-- Looking for pthread.h - not found
+-- Found Threads: TRUE  
+-- Found OpenGL: opengl32   
+-- Found GLUT: optimized;D:/tempML/tempMLPNN_V2/library/openGL/freeglut.lib;debug;D:/tempML/tempMLPNN_V2/library/openGL/freeglutd.lib  
 -- Configuring done
+WARNING: Target "tempMLPNN" requests linking to directory "D:/tempML/tempMLPNN_V2/library/openJPEG/lib".  Targets may link only to libraries.  CMake is dropping the item.
 -- Generating done
 -- Build files have been written to: D:/tempML/tempMLPNN_V2/cmake-build-release

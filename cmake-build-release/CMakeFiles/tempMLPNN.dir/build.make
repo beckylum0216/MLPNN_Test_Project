@@ -229,6 +229,44 @@ CMakeFiles\tempMLPNN.dir\BooleanArithmetic.cpp.s: cmake_force
  /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\tempMLPNN.dir\BooleanArithmetic.cpp.s /c D:\tempML\tempMLPNN_V2\BooleanArithmetic.cpp
 <<
 
+CMakeFiles\tempMLPNN.dir\Convolution.cpp.obj: CMakeFiles\tempMLPNN.dir\flags.make
+CMakeFiles\tempMLPNN.dir\Convolution.cpp.obj: ..\Convolution.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/tempMLPNN.dir/Convolution.cpp.obj"
+	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1415~1.267\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\tempMLPNN.dir\Convolution.cpp.obj /FdCMakeFiles\tempMLPNN.dir\ /FS -c D:\tempML\tempMLPNN_V2\Convolution.cpp
+<<
+
+CMakeFiles\tempMLPNN.dir\Convolution.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tempMLPNN.dir/Convolution.cpp.i"
+	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1415~1.267\bin\Hostx86\x86\cl.exe > CMakeFiles\tempMLPNN.dir\Convolution.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\tempML\tempMLPNN_V2\Convolution.cpp
+<<
+
+CMakeFiles\tempMLPNN.dir\Convolution.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tempMLPNN.dir/Convolution.cpp.s"
+	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1415~1.267\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\tempMLPNN.dir\Convolution.cpp.s /c D:\tempML\tempMLPNN_V2\Convolution.cpp
+<<
+
+CMakeFiles\tempMLPNN.dir\unittest\testy.cpp.obj: CMakeFiles\tempMLPNN.dir\flags.make
+CMakeFiles\tempMLPNN.dir\unittest\testy.cpp.obj: ..\unittest\testy.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/tempMLPNN.dir/unittest/testy.cpp.obj"
+	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1415~1.267\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoCMakeFiles\tempMLPNN.dir\unittest\testy.cpp.obj /FdCMakeFiles\tempMLPNN.dir\ /FS -c D:\tempML\tempMLPNN_V2\unittest\testy.cpp
+<<
+
+CMakeFiles\tempMLPNN.dir\unittest\testy.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tempMLPNN.dir/unittest/testy.cpp.i"
+	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1415~1.267\bin\Hostx86\x86\cl.exe > CMakeFiles\tempMLPNN.dir\unittest\testy.cpp.i @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\tempML\tempMLPNN_V2\unittest\testy.cpp
+<<
+
+CMakeFiles\tempMLPNN.dir\unittest\testy.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tempMLPNN.dir/unittest/testy.cpp.s"
+	C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1415~1.267\bin\Hostx86\x86\cl.exe @<<
+ /nologo /TP $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) /FoNUL /FAs /FaCMakeFiles\tempMLPNN.dir\unittest\testy.cpp.s /c D:\tempML\tempMLPNN_V2\unittest\testy.cpp
+<<
+
 # Object files for target tempMLPNN
 tempMLPNN_OBJECTS = \
 "CMakeFiles\tempMLPNN.dir\main.cpp.obj" \
@@ -239,7 +277,9 @@ tempMLPNN_OBJECTS = \
 "CMakeFiles\tempMLPNN.dir\Result.cpp.obj" \
 "CMakeFiles\tempMLPNN.dir\ImageHeader.cpp.obj" \
 "CMakeFiles\tempMLPNN.dir\LabelHeader.cpp.obj" \
-"CMakeFiles\tempMLPNN.dir\BooleanArithmetic.cpp.obj"
+"CMakeFiles\tempMLPNN.dir\BooleanArithmetic.cpp.obj" \
+"CMakeFiles\tempMLPNN.dir\Convolution.cpp.obj" \
+"CMakeFiles\tempMLPNN.dir\unittest\testy.cpp.obj"
 
 # External object files for target tempMLPNN
 tempMLPNN_EXTERNAL_OBJECTS =
@@ -253,12 +293,17 @@ tempMLPNN.exe: CMakeFiles\tempMLPNN.dir\Result.cpp.obj
 tempMLPNN.exe: CMakeFiles\tempMLPNN.dir\ImageHeader.cpp.obj
 tempMLPNN.exe: CMakeFiles\tempMLPNN.dir\LabelHeader.cpp.obj
 tempMLPNN.exe: CMakeFiles\tempMLPNN.dir\BooleanArithmetic.cpp.obj
+tempMLPNN.exe: CMakeFiles\tempMLPNN.dir\Convolution.cpp.obj
+tempMLPNN.exe: CMakeFiles\tempMLPNN.dir\unittest\testy.cpp.obj
 tempMLPNN.exe: CMakeFiles\tempMLPNN.dir\build.make
 tempMLPNN.exe: ..\library\openGL\freeglut.lib
+tempMLPNN.exe: lib\gtest.lib
+tempMLPNN.exe: lib\gtest_main.lib
+tempMLPNN.exe: lib\gtest.lib
 tempMLPNN.exe: CMakeFiles\tempMLPNN.dir\objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable tempMLPNN.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable tempMLPNN.exe"
 	"C:\Program Files\JetBrains\CLion 2018.2.6\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\tempMLPNN.dir --manifests  -- C:\PROGRA~2\MICROS~2\2017\COMMUN~1\VC\Tools\MSVC\1415~1.267\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\tempMLPNN.dir\objects1.rsp @<<
- /out:tempMLPNN.exe /implib:tempMLPNN.lib /pdb:D:\tempML\tempMLPNN_V2\cmake-build-release\tempMLPNN.pdb /version:0.0  /machine:X86 /INCREMENTAL:NO /subsystem:console opengl32.lib glu32.lib ..\library\openGL\freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
+ /out:tempMLPNN.exe /implib:tempMLPNN.lib /pdb:D:\tempML\tempMLPNN_V2\cmake-build-release\tempMLPNN.pdb /version:0.0  /machine:X86 /INCREMENTAL:NO /subsystem:console opengl32.lib glu32.lib ..\library\openGL\freeglut.lib lib\gtest.lib lib\gtest_main.lib lib\gtest.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib 
 <<
 
 # Rule to build all files generated by this target.

@@ -77,7 +77,6 @@ void Layer::ResizeLayer(ImageHeader imgHdr, LabelHeader lblHdr, int inputSize)
             {
                 tempNeuron[ii].inputArr[jj][kk] = this->theLayer[ii].inputArr[jj][kk];
                 tempNeuron[ii].weightOne[jj][kk] = this->theLayer[ii].weightOne[jj][kk];
-                tempNeuron[ii].weightTwo[jj][kk] = this->theLayer[ii].weightTwo[jj][kk];
             }
         }
 
@@ -104,7 +103,6 @@ void Layer::ResizeLayer(ImageHeader imgHdr, LabelHeader lblHdr, int inputSize)
             {
                 theLayer[ii].inputArr[jj][kk] = tempNeuron[ii].inputArr[jj][kk];
                 theLayer[ii].weightOne[jj][kk] = tempNeuron[ii].weightOne[jj][kk];
-                theLayer[ii].weightTwo[jj][kk] = tempNeuron[ii].weightTwo[jj][kk];
             }
         }
 

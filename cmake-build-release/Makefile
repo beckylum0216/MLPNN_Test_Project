@@ -67,6 +67,28 @@ list_install_components\fast: list_install_components
 
 .PHONY : list_install_components\fast
 
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	echo >nul && "C:\Program Files\JetBrains\CLion 2018.2.6\bin\cmake\win\bin\cmake.exe" -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache\fast: rebuild_cache
+
+.PHONY : rebuild_cache\fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	echo >nul && "C:\Program Files\JetBrains\CLion 2018.2.6\bin\cmake\win\bin\ctest.exe" --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test\fast: test
+
+.PHONY : test\fast
+
 # Special rule for the target install/local
 install\local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -101,17 +123,6 @@ edit_cache:
 edit_cache\fast: edit_cache
 
 .PHONY : edit_cache\fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	echo >nul && "C:\Program Files\JetBrains\CLion 2018.2.6\bin\cmake\win\bin\cmake.exe" -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache\fast: rebuild_cache
-
-.PHONY : rebuild_cache\fast
 
 # The main all target
 all: cmake_check_build_system
@@ -158,6 +169,58 @@ tempMLPNN\fast:
 	$(MAKE) -f CMakeFiles\tempMLPNN.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\tempMLPNN.dir\build
 .PHONY : tempMLPNN\fast
 
+#=============================================================================
+# Target rules for targets named gmock_main
+
+# Build rule for target.
+gmock_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) gmock_main
+.PHONY : gmock_main
+
+# fast build rule for target.
+gmock_main\fast:
+	$(MAKE) -f googletest\googlemock\CMakeFiles\gmock_main.dir\build.make /nologo -$(MAKEFLAGS) googletest\googlemock\CMakeFiles\gmock_main.dir\build
+.PHONY : gmock_main\fast
+
+#=============================================================================
+# Target rules for targets named gmock
+
+# Build rule for target.
+gmock: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) gmock
+.PHONY : gmock
+
+# fast build rule for target.
+gmock\fast:
+	$(MAKE) -f googletest\googlemock\CMakeFiles\gmock.dir\build.make /nologo -$(MAKEFLAGS) googletest\googlemock\CMakeFiles\gmock.dir\build
+.PHONY : gmock\fast
+
+#=============================================================================
+# Target rules for targets named gtest
+
+# Build rule for target.
+gtest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) gtest
+.PHONY : gtest
+
+# fast build rule for target.
+gtest\fast:
+	$(MAKE) -f googletest\googlemock\gtest\CMakeFiles\gtest.dir\build.make /nologo -$(MAKEFLAGS) googletest\googlemock\gtest\CMakeFiles\gtest.dir\build
+.PHONY : gtest\fast
+
+#=============================================================================
+# Target rules for targets named gtest_main
+
+# Build rule for target.
+gtest_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) gtest_main
+.PHONY : gtest_main
+
+# fast build rule for target.
+gtest_main\fast:
+	$(MAKE) -f googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\build.make /nologo -$(MAKEFLAGS) googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\build
+.PHONY : gtest_main\fast
+
 BooleanArithmetic.obj: BooleanArithmetic.cpp.obj
 
 .PHONY : BooleanArithmetic.obj
@@ -184,6 +247,33 @@ BooleanArithmetic.s: BooleanArithmetic.cpp.s
 BooleanArithmetic.cpp.s:
 	$(MAKE) -f CMakeFiles\tempMLPNN.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\tempMLPNN.dir\BooleanArithmetic.cpp.s
 .PHONY : BooleanArithmetic.cpp.s
+
+Convolution.obj: Convolution.cpp.obj
+
+.PHONY : Convolution.obj
+
+# target to build an object file
+Convolution.cpp.obj:
+	$(MAKE) -f CMakeFiles\tempMLPNN.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\tempMLPNN.dir\Convolution.cpp.obj
+.PHONY : Convolution.cpp.obj
+
+Convolution.i: Convolution.cpp.i
+
+.PHONY : Convolution.i
+
+# target to preprocess a source file
+Convolution.cpp.i:
+	$(MAKE) -f CMakeFiles\tempMLPNN.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\tempMLPNN.dir\Convolution.cpp.i
+.PHONY : Convolution.cpp.i
+
+Convolution.s: Convolution.cpp.s
+
+.PHONY : Convolution.s
+
+# target to generate assembly for a file
+Convolution.cpp.s:
+	$(MAKE) -f CMakeFiles\tempMLPNN.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\tempMLPNN.dir\Convolution.cpp.s
+.PHONY : Convolution.cpp.s
 
 ImageHeader.obj: ImageHeader.cpp.obj
 
@@ -401,6 +491,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles\tempMLPNN.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\tempMLPNN.dir\main.cpp.s
 .PHONY : main.cpp.s
 
+unittest\testy.obj: unittest\testy.cpp.obj
+
+.PHONY : unittest\testy.obj
+
+# target to build an object file
+unittest\testy.cpp.obj:
+	$(MAKE) -f CMakeFiles\tempMLPNN.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\tempMLPNN.dir\unittest\testy.cpp.obj
+.PHONY : unittest\testy.cpp.obj
+
+unittest\testy.i: unittest\testy.cpp.i
+
+.PHONY : unittest\testy.i
+
+# target to preprocess a source file
+unittest\testy.cpp.i:
+	$(MAKE) -f CMakeFiles\tempMLPNN.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\tempMLPNN.dir\unittest\testy.cpp.i
+.PHONY : unittest\testy.cpp.i
+
+unittest\testy.s: unittest\testy.cpp.s
+
+.PHONY : unittest\testy.s
+
+# target to generate assembly for a file
+unittest\testy.cpp.s:
+	$(MAKE) -f CMakeFiles\tempMLPNN.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\tempMLPNN.dir\unittest\testy.cpp.s
+.PHONY : unittest\testy.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -409,13 +526,21 @@ help:
 	@echo ... depend
 	@echo ... list_install_components
 	@echo ... tempMLPNN
+	@echo ... rebuild_cache
+	@echo ... test
 	@echo ... install/local
 	@echo ... install
 	@echo ... edit_cache
-	@echo ... rebuild_cache
+	@echo ... gmock_main
+	@echo ... gmock
+	@echo ... gtest
+	@echo ... gtest_main
 	@echo ... BooleanArithmetic.obj
 	@echo ... BooleanArithmetic.i
 	@echo ... BooleanArithmetic.s
+	@echo ... Convolution.obj
+	@echo ... Convolution.i
+	@echo ... Convolution.s
 	@echo ... ImageHeader.obj
 	@echo ... ImageHeader.i
 	@echo ... ImageHeader.s
@@ -440,6 +565,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... unittest/testy.obj
+	@echo ... unittest/testy.i
+	@echo ... unittest/testy.s
 .PHONY : help
 
 

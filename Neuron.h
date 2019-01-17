@@ -22,7 +22,6 @@ class Neuron {
         void ResizeNeuron(ImageHeader imgHdr, LabelHeader lblHdr);
         GLdouble ** inputArr;
         GLdouble ** weightOne;
-        GLdouble ** weightTwo;
         GLdouble output;
         GLdouble sigmoidOutput;
         GLdouble bias;

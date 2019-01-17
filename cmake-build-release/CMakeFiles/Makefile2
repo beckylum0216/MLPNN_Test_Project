@@ -69,10 +69,11 @@ CMAKE_BINARY_DIR = D:\tempML\tempMLPNN_V2\cmake-build-release
 # Target rules for target CMakeFiles/tempMLPNN.dir
 
 # All Build rule for target.
-CMakeFiles\tempMLPNN.dir\all:
+CMakeFiles\tempMLPNN.dir\all: googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\all
+CMakeFiles\tempMLPNN.dir\all: googletest\googlemock\gtest\CMakeFiles\gtest.dir\all
 	$(MAKE) -f CMakeFiles\tempMLPNN.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\tempMLPNN.dir\depend
 	$(MAKE) -f CMakeFiles\tempMLPNN.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\tempMLPNN.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10 "Built target tempMLPNN"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles --progress-num=12,13,14,15,16,17,18,19,20,21,22,23 "Built target tempMLPNN"
 .PHONY : CMakeFiles\tempMLPNN.dir\all
 
 # Include target in all.
@@ -82,7 +83,7 @@ all: CMakeFiles\tempMLPNN.dir\all
 
 # Build rule for subdir invocation for target.
 CMakeFiles\tempMLPNN.dir\rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles 16
 	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\tempMLPNN.dir\all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles 0
 .PHONY : CMakeFiles\tempMLPNN.dir\rule
@@ -99,6 +100,214 @@ CMakeFiles\tempMLPNN.dir\clean:
 
 # clean rule for target.
 clean: CMakeFiles\tempMLPNN.dir\clean
+
+.PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory googletest
+
+# Convenience name for "all" pass in the directory.
+googletest\all: googletest\googlemock\all
+
+.PHONY : googletest\all
+
+# Convenience name for "clean" pass in the directory.
+googletest\clean: googletest\googlemock\clean
+
+.PHONY : googletest\clean
+
+# Convenience name for "preinstall" pass in the directory.
+googletest\preinstall: googletest\googlemock\preinstall
+
+.PHONY : googletest\preinstall
+
+#=============================================================================
+# Directory level rules for directory googletest\googlemock
+
+# Convenience name for "all" pass in the directory.
+googletest\googlemock\all: googletest\googlemock\CMakeFiles\gmock_main.dir\all
+googletest\googlemock\all: googletest\googlemock\CMakeFiles\gmock.dir\all
+googletest\googlemock\all: googletest\googlemock\gtest\all
+
+.PHONY : googletest\googlemock\all
+
+# Convenience name for "clean" pass in the directory.
+googletest\googlemock\clean: googletest\googlemock\CMakeFiles\gmock_main.dir\clean
+googletest\googlemock\clean: googletest\googlemock\CMakeFiles\gmock.dir\clean
+googletest\googlemock\clean: googletest\googlemock\gtest\clean
+
+.PHONY : googletest\googlemock\clean
+
+# Convenience name for "preinstall" pass in the directory.
+googletest\googlemock\preinstall: googletest\googlemock\gtest\preinstall
+
+.PHONY : googletest\googlemock\preinstall
+
+#=============================================================================
+# Target rules for target googletest/googlemock/CMakeFiles/gmock_main.dir
+
+# All Build rule for target.
+googletest\googlemock\CMakeFiles\gmock_main.dir\all:
+	$(MAKE) -f googletest\googlemock\CMakeFiles\gmock_main.dir\build.make /nologo -$(MAKEFLAGS) googletest\googlemock\CMakeFiles\gmock_main.dir\depend
+	$(MAKE) -f googletest\googlemock\CMakeFiles\gmock_main.dir\build.make /nologo -$(MAKEFLAGS) googletest\googlemock\CMakeFiles\gmock_main.dir\build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles --progress-num=4,5,6,7 "Built target gmock_main"
+.PHONY : googletest\googlemock\CMakeFiles\gmock_main.dir\all
+
+# Include target in all.
+all: googletest\googlemock\CMakeFiles\gmock_main.dir\all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+googletest\googlemock\CMakeFiles\gmock_main.dir\rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles 4
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) googletest\googlemock\CMakeFiles\gmock_main.dir\all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles 0
+.PHONY : googletest\googlemock\CMakeFiles\gmock_main.dir\rule
+
+# Convenience name for target.
+gmock_main: googletest\googlemock\CMakeFiles\gmock_main.dir\rule
+
+.PHONY : gmock_main
+
+# clean rule for target.
+googletest\googlemock\CMakeFiles\gmock_main.dir\clean:
+	$(MAKE) -f googletest\googlemock\CMakeFiles\gmock_main.dir\build.make /nologo -$(MAKEFLAGS) googletest\googlemock\CMakeFiles\gmock_main.dir\clean
+.PHONY : googletest\googlemock\CMakeFiles\gmock_main.dir\clean
+
+# clean rule for target.
+clean: googletest\googlemock\CMakeFiles\gmock_main.dir\clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target googletest/googlemock/CMakeFiles/gmock.dir
+
+# All Build rule for target.
+googletest\googlemock\CMakeFiles\gmock.dir\all:
+	$(MAKE) -f googletest\googlemock\CMakeFiles\gmock.dir\build.make /nologo -$(MAKEFLAGS) googletest\googlemock\CMakeFiles\gmock.dir\depend
+	$(MAKE) -f googletest\googlemock\CMakeFiles\gmock.dir\build.make /nologo -$(MAKEFLAGS) googletest\googlemock\CMakeFiles\gmock.dir\build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles --progress-num=1,2,3 "Built target gmock"
+.PHONY : googletest\googlemock\CMakeFiles\gmock.dir\all
+
+# Include target in all.
+all: googletest\googlemock\CMakeFiles\gmock.dir\all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+googletest\googlemock\CMakeFiles\gmock.dir\rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles 3
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) googletest\googlemock\CMakeFiles\gmock.dir\all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles 0
+.PHONY : googletest\googlemock\CMakeFiles\gmock.dir\rule
+
+# Convenience name for target.
+gmock: googletest\googlemock\CMakeFiles\gmock.dir\rule
+
+.PHONY : gmock
+
+# clean rule for target.
+googletest\googlemock\CMakeFiles\gmock.dir\clean:
+	$(MAKE) -f googletest\googlemock\CMakeFiles\gmock.dir\build.make /nologo -$(MAKEFLAGS) googletest\googlemock\CMakeFiles\gmock.dir\clean
+.PHONY : googletest\googlemock\CMakeFiles\gmock.dir\clean
+
+# clean rule for target.
+clean: googletest\googlemock\CMakeFiles\gmock.dir\clean
+
+.PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory googletest\googlemock\gtest
+
+# Convenience name for "all" pass in the directory.
+googletest\googlemock\gtest\all: googletest\googlemock\gtest\CMakeFiles\gtest.dir\all
+googletest\googlemock\gtest\all: googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\all
+
+.PHONY : googletest\googlemock\gtest\all
+
+# Convenience name for "clean" pass in the directory.
+googletest\googlemock\gtest\clean: googletest\googlemock\gtest\CMakeFiles\gtest.dir\clean
+googletest\googlemock\gtest\clean: googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\clean
+
+.PHONY : googletest\googlemock\gtest\clean
+
+# Convenience name for "preinstall" pass in the directory.
+googletest\googlemock\gtest\preinstall:
+
+.PHONY : googletest\googlemock\gtest\preinstall
+
+#=============================================================================
+# Target rules for target googletest/googlemock/gtest/CMakeFiles/gtest.dir
+
+# All Build rule for target.
+googletest\googlemock\gtest\CMakeFiles\gtest.dir\all:
+	$(MAKE) -f googletest\googlemock\gtest\CMakeFiles\gtest.dir\build.make /nologo -$(MAKEFLAGS) googletest\googlemock\gtest\CMakeFiles\gtest.dir\depend
+	$(MAKE) -f googletest\googlemock\gtest\CMakeFiles\gtest.dir\build.make /nologo -$(MAKEFLAGS) googletest\googlemock\gtest\CMakeFiles\gtest.dir\build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles --progress-num=8,9 "Built target gtest"
+.PHONY : googletest\googlemock\gtest\CMakeFiles\gtest.dir\all
+
+# Include target in all.
+all: googletest\googlemock\gtest\CMakeFiles\gtest.dir\all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+googletest\googlemock\gtest\CMakeFiles\gtest.dir\rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles 2
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) googletest\googlemock\gtest\CMakeFiles\gtest.dir\all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles 0
+.PHONY : googletest\googlemock\gtest\CMakeFiles\gtest.dir\rule
+
+# Convenience name for target.
+gtest: googletest\googlemock\gtest\CMakeFiles\gtest.dir\rule
+
+.PHONY : gtest
+
+# clean rule for target.
+googletest\googlemock\gtest\CMakeFiles\gtest.dir\clean:
+	$(MAKE) -f googletest\googlemock\gtest\CMakeFiles\gtest.dir\build.make /nologo -$(MAKEFLAGS) googletest\googlemock\gtest\CMakeFiles\gtest.dir\clean
+.PHONY : googletest\googlemock\gtest\CMakeFiles\gtest.dir\clean
+
+# clean rule for target.
+clean: googletest\googlemock\gtest\CMakeFiles\gtest.dir\clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target googletest/googlemock/gtest/CMakeFiles/gtest_main.dir
+
+# All Build rule for target.
+googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\all: googletest\googlemock\gtest\CMakeFiles\gtest.dir\all
+	$(MAKE) -f googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\build.make /nologo -$(MAKEFLAGS) googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\depend
+	$(MAKE) -f googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\build.make /nologo -$(MAKEFLAGS) googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles --progress-num=10,11 "Built target gtest_main"
+.PHONY : googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\all
+
+# Include target in all.
+all: googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles 4
+	$(MAKE) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\all
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\tempML\tempMLPNN_V2\cmake-build-release\CMakeFiles 0
+.PHONY : googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\rule
+
+# Convenience name for target.
+gtest_main: googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\rule
+
+.PHONY : gtest_main
+
+# clean rule for target.
+googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\clean:
+	$(MAKE) -f googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\build.make /nologo -$(MAKEFLAGS) googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\clean
+.PHONY : googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\clean
+
+# clean rule for target.
+clean: googletest\googlemock\gtest\CMakeFiles\gtest_main.dir\clean
 
 .PHONY : clean
 

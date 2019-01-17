@@ -6,5 +6,5 @@ CXX_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /O2 /Ob2 /DNDEBUG   -std:c++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -ID:\tempML\tempMLPNN_V2\headers 
+CXX_INCLUDES = -ID:\tempML\tempMLPNN_V2\headers -ID:\tempML\tempMLPNN_V2\googletest\googletest\include -ID:\tempML\tempMLPNN_V2\googletest\googletest 
 

@@ -8,6 +8,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/tempMLPNN.dir/ImageHeader.cpp.obj"
   "CMakeFiles/tempMLPNN.dir/LabelHeader.cpp.obj"
   "CMakeFiles/tempMLPNN.dir/BooleanArithmetic.cpp.obj"
+  "CMakeFiles/tempMLPNN.dir/Convolution.cpp.obj"
+  "CMakeFiles/tempMLPNN.dir/unittest/testy.cpp.obj"
   "tempMLPNN.pdb"
   "tempMLPNN.exe"
   "tempMLPNN.exe.manifest"

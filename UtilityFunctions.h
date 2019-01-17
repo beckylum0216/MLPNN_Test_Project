@@ -9,6 +9,7 @@
 #include <fstream>
 #include <vector>
 #include <GL/freeglut.h>
+#include <openJPEG/openjpeg-2.3/openjpeg.h>
 #include "ImageHeader.h"
 #include "LabelHeader.h"
 
@@ -24,6 +25,9 @@ class UtilityFunctions {
         GLdouble * ReadLabelFile(std::string theFile, LabelHeader  labelHdr);
         void DeallocateMemory();
         void DisplayImage(GLdouble ***inputArr);
+
+
+
 
     private:
         GLdouble *** imgMatrix;

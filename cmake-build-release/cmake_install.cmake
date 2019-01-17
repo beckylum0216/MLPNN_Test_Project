@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/TempMNIST")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/tempMLPNN")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -42,6 +42,12 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
 file(INSTALL DESTINATION "D:/tempML/tempMLPNN_V2/bin" TYPE EXECUTABLE FILES "D:/tempML/tempMLPNN_V2/cmake-build-release/tempMLPNN.exe")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for each subdirectory.
+  include("D:/tempML/tempMLPNN_V2/cmake-build-release/googletest/cmake_install.cmake")
+
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
